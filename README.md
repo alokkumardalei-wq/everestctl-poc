@@ -7,8 +7,7 @@ Management CLI"** (2026 Term 2).
 ![everestctl POC walkthrough](demo.gif)
 
 *~75-second walkthrough: build → tests with coverage → `db / cluster / plugin`
-commands → multiple output formats → shell completion preview.
-
+commands → multiple output formats → shell completion preview.*
 
 This POC implements the proposed command surface on top of a pluggable
 backend interface. The shipped backend is in-memory, so every command is
