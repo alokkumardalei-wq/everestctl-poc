@@ -4,6 +4,12 @@ A proof-of-concept for the LFX mentorship project
 **"CNCF - OpenEverest: Transform `everestctl` into a Powerful Database
 Management CLI"** (2026 Term 2).
 
+![everestctl POC walkthrough](demo.gif)
+
+*~75-second walkthrough: build → tests with coverage → `db / cluster / plugin`
+commands → multiple output formats → shell completion preview.
+[Replay interactively](demo.cast) with `asciinema play demo.cast`.*
+
 This POC implements the proposed command surface on top of a pluggable
 backend interface. The shipped backend is in-memory, so every command is
 runnable without a Kubernetes cluster — the real implementation later
@@ -181,27 +187,26 @@ Two layers of tests:
   cobra command end-to-end (table / json / yaml output, required-flag
   enforcement, create→get→delete round trip, shell completion).
 
-## Recording a demo
+## Re-recording the demo
 
-A paced script that walks through every command surface in ~75 seconds:
-
-```sh
-./scripts/record-demo.sh             # default pacing
-SPEED=fast ./scripts/record-demo.sh  # ~45s
-SPEED=slow ./scripts/record-demo.sh  # ~110s
-```
-
-Capture with [asciinema](https://asciinema.org/) or OBS (1080p, font ≥ 18pt):
+The GIF at the top of this README is generated locally — no external
+host, no link rot. To regenerate it:
 
 ```sh
-asciinema rec demo.cast -c './scripts/record-demo.sh'
-asciinema upload demo.cast
+# 1. record the cast (asciinema 3.x, geometry tuned for tables)
+asciinema rec demo.cast --overwrite --window-size 120x32 \
+    -c './scripts/record-demo.sh'
+
+# 2. render to GIF (agg = asciinema gif generator)
+agg --theme monokai --speed 1.2 --font-size 16 demo.cast demo.gif
 ```
 
-The script runs build → tests-with-coverage → every command surface →
-completion preview. Each binary call is its own process (the in-memory
-backend resets between calls), so the script demonstrates command
-*shape*; the full create→get→delete lifecycle is proven by
+The pacing script `scripts/record-demo.sh` supports `SPEED=fast` (~45s)
+and `SPEED=slow` (~110s) overrides. It runs build → tests-with-coverage
+→ every command surface → completion preview. Each binary invocation is
+its own process (the in-memory backend resets between calls), so the
+recording demonstrates each command's *shape*; the full
+create → get → delete lifecycle is proven inside one process by
 `TestDBCreateGetDelete_RoundTrip`.
 
 ## Roadmap to the real implementation
