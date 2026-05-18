@@ -1,7 +1,7 @@
 # everestctl POC
 
 A proof-of-concept for the LFX mentorship project
-**"CNCF — OpenEverest: Transform `everestctl` into a Powerful Database
+**"CNCF - OpenEverest: Transform `everestctl` into a Powerful Database
 Management CLI"** (2026 Term 2).
 
 This POC implements the proposed command surface on top of a pluggable
