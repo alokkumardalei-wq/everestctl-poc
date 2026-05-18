@@ -181,6 +181,29 @@ Two layers of tests:
   cobra command end-to-end (table / json / yaml output, required-flag
   enforcement, create→get→delete round trip, shell completion).
 
+## Recording a demo
+
+A paced script that walks through every command surface in ~75 seconds:
+
+```sh
+./scripts/record-demo.sh             # default pacing
+SPEED=fast ./scripts/record-demo.sh  # ~45s
+SPEED=slow ./scripts/record-demo.sh  # ~110s
+```
+
+Capture with [asciinema](https://asciinema.org/) or OBS (1080p, font ≥ 18pt):
+
+```sh
+asciinema rec demo.cast -c './scripts/record-demo.sh'
+asciinema upload demo.cast
+```
+
+The script runs build → tests-with-coverage → every command surface →
+completion preview. Each binary call is its own process (the in-memory
+backend resets between calls), so the script demonstrates command
+*shape*; the full create→get→delete lifecycle is proven by
+`TestDBCreateGetDelete_RoundTrip`.
+
 ## Roadmap to the real implementation
 
 | Phase | Work                                                                 |
