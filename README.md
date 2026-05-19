@@ -186,27 +186,7 @@ Two layers of tests:
   cobra command end-to-end (table / json / yaml output, required-flag
   enforcement, create→get→delete round trip, shell completion).
 
-## Re-recording the demo
 
-The GIF at the top of this README is generated locally — no external
-host, no link rot. To regenerate it:
-
-```sh
-# 1. record the cast (asciinema 3.x, geometry tuned for tables)
-asciinema rec demo.cast --overwrite --window-size 120x32 \
-    -c './scripts/record-demo.sh'
-
-# 2. render to GIF (agg = asciinema gif generator)
-agg --theme monokai --speed 1.2 --font-size 16 demo.cast demo.gif
-```
-
-The pacing script `scripts/record-demo.sh` supports `SPEED=fast` (~45s)
-and `SPEED=slow` (~110s) overrides. It runs build → tests-with-coverage
-→ every command surface → completion preview. Each binary invocation is
-its own process (the in-memory backend resets between calls), so the
-recording demonstrates each command's *shape*; the full
-create → get → delete lifecycle is proven inside one process by
-`TestDBCreateGetDelete_RoundTrip`.
 
 ## Roadmap to the real implementation
 
