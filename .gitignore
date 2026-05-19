@@ -2,3 +2,8 @@ bin/
 cover.out
 *.test
 *.out
+
+# diagram rendering toolchain (local-only)
+node_modules/
+package.json
+package-lock.json

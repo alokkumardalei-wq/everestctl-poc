@@ -57,6 +57,13 @@ graph LR
     class db_list,db_get,db_create,db_delete,db_logs,cl_list,cl_reg,cl_status,pl_list,pl_install,pl_config,sh leaf
 ```
 
+<p align="center">
+  <sub>
+    <b>Figure 1 · The proposed command surface.</b>
+    <a href="docs/diagrams/01-command-tree.png">View full-resolution PNG →</a>
+  </sub>
+</p>
+
 ## Quickstart
 
 ```sh
@@ -132,6 +139,13 @@ flowchart TB
     classDef future stroke-dasharray: 5 5,fill:#fff5e6,stroke:#cc8a00
 ```
 
+<p align="center">
+  <sub>
+    <b>Figure 2 · Package layout and the single <code>Backend</code> seam.</b>
+    <a href="docs/diagrams/02-architecture.png">View full-resolution PNG →</a>
+  </sub>
+</p>
+
 The dashed `KubernetesBackend` block is the *only* thing the real
 implementation adds — nothing in the `cli` tree changes.
 
@@ -157,6 +171,13 @@ sequenceDiagram
     D->>O: Render(stdout, json, db)
     O-->>U: JSON payload
 ```
+
+<p align="center">
+  <sub>
+    <b>Figure 3 · End-to-end flow of <code>db create</code>, from keystroke to JSON payload.</b>
+    <a href="docs/diagrams/03-db-create-sequence.png">View full-resolution PNG →</a>
+  </sub>
+</p>
 
 Two design decisions worth flagging for the mentorship review:
 

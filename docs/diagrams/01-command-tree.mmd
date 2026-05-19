@@ -1,0 +1,25 @@
+graph LR
+    root([everestctl])
+    root --> db[db]
+    root --> cluster[cluster]
+    root --> plugin[plugin]
+    root --> completion[completion]
+
+    db --> db_list[list]
+    db --> db_get[get]
+    db --> db_create[create]
+    db --> db_delete[delete]
+    db --> db_logs[logs]
+
+    cluster --> cl_list[list]
+    cluster --> cl_reg[register]
+    cluster --> cl_status[status]
+
+    plugin --> pl_list[list]
+    plugin --> pl_install[install]
+    plugin --> pl_config[configure]
+
+    completion --> sh[bash / zsh / fish / powershell]
+
+    classDef leaf fill:#eef,stroke:#557
+    class db_list,db_get,db_create,db_delete,db_logs,cl_list,cl_reg,cl_status,pl_list,pl_install,pl_config,sh leaf

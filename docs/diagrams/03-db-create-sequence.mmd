@@ -1,0 +1,20 @@
+sequenceDiagram
+    autonumber
+    actor U as user
+    participant M as main
+    participant R as cobra root
+    participant D as db/create cmd
+    participant B as Backend (iface)
+    participant I as MemoryBackend<br/>(future: K8s client)
+    participant O as output renderer
+
+    U->>M: everestctl db create orders-pg --engine postgresql -o json
+    M->>R: ExecuteContext(ctx)
+    R->>D: dispatch + parse flags
+    D->>D: backend.ParseEngine("postgresql")
+    D->>B: CreateDatabase(opts)
+    B->>I: (impl call)
+    I-->>B: Database{status: pending}
+    B-->>D: Database
+    D->>O: Render(stdout, json, db)
+    O-->>U: JSON payload
